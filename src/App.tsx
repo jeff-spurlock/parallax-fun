@@ -1,5 +1,6 @@
 import React from 'react'
 import { useParallax } from 'react-scroll-parallax'
+import { cn } from './lib/utils'
 
 function App() {
   const items = Array.from({ length: 300 }).map(() => {
@@ -10,14 +11,17 @@ function App() {
   })
 
   return (
-    <div className="w-screen h-[300vh] bg-gray-900 relative">
-      <h1 className="text-white text-2xl p-4">Test</h1>
-      <div className="relative w-full h-full">
-        {items.map((item, index) => (
-          <Dot key={index} {...item} />
-        ))}
+    <>
+      <div className="w-screen h-[300vh] bg-gray-900 relative">
+        <h1 className="text-white text-2xl p-4">Test</h1>
+        <div className="relative w-full h-full">
+          {items.map((item, index) => (
+            <Dot key={index} {...item} />
+          ))}
+        </div>
       </div>
-    </div>
+      <div className="w-screen h-[100vh] bg-gray-900" />
+    </>
   )
 }
 
@@ -26,7 +30,7 @@ const Dot = ({ x, y, z }: { x: number, y: number, z: number }) => {
   return (
     <div
       ref={parallax.ref as React.Ref<HTMLDivElement>}
-      className="w-4 h-4 rounded-full bg-red-500 absolute"
+      className={cn("w-2 h-2 rounded-full absolute", z === 0 ? "bg-slate-200/50" : z === 1 ? "bg-slate-200/60" : z === 2 ? "bg-slate-200/70" : z === 3 ? "bg-slate-200/80" : z === 4 ? "bg-slate-200/90" : "bg-slate-200")}
       style={{
         left: `${x}%`,
         top: `${y}%`,
